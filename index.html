@@ -118,7 +118,7 @@
             text-transform: uppercase; letter-spacing: .5px;
         }
 
-        /* ── TICKER / COMING SOON ─────────────── */
+        /* ── TICKER ──────────────────────────── */
         .ticker {
             background: #0f172a; border: 1px solid #1e3a5f;
             border-radius: 12px; padding: 13px 20px;
@@ -151,226 +151,98 @@
         }
         .ticker-item i { color: var(--blue); font-size: 8px; }
 
-        /* ── SECTION HEADER ───────────────────── */
-        .section-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 18px;
-        }
+        /* ── GRID ─────────────────────────────── */
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
         .section-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 20px; letter-spacing: 1px;
-            border-left: 3px solid var(--blue); padding-left: 12px;
-            display: flex; align-items: center; gap: 10px;
+            font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px;
+            border-left: 3px solid var(--blue); padding-left: 12px; display: flex; align-items: center; gap: 10px;
         }
         .count-pill {
             font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
             background: #1e293b; color: var(--muted); padding: 2px 10px; border-radius: 20px;
         }
 
-        /* ── GENRE CHIPS ──────────────────────── */
         .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
         .chip {
             background: #0f172a; border: 1px solid var(--border);
             color: var(--muted); border-radius: 20px; padding: 5px 14px;
-            font-size: 12px; font-weight: 700; cursor: pointer;
-            font-family: 'Nunito', sans-serif; transition: all .2s;
+            font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s;
         }
         .chip:hover { border-color: var(--blue); color: var(--blue); }
         .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-        /* ── GRID ─────────────────────────────── */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-            gap: 18px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 18px; }
 
-        /* ── CARD ─────────────────────────────── */
         .ani-card { cursor: pointer; transition: transform .25s cubic-bezier(.4,0,.2,1); }
         .ani-card:hover { transform: translateY(-6px); }
-        .ani-card:hover .card-title { color: var(--blue); }
-
         .card-thumb {
-            position: relative; aspect-ratio: 2/3;
-            border-radius: 12px; overflow: hidden;
+            position: relative; aspect-ratio: 2/3; border-radius: 12px; overflow: hidden;
             border: 1px solid var(--border); background: #0f172a; margin-bottom: 10px;
         }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .card-fallback {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 10px;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
-        .card-fallback i { font-size: 36px; color: var(--blue); opacity: .35; }
-        .card-fallback span {
-            font-size: 11px; color: #475569; text-align: center;
-            padding: 0 10px; font-weight: 700; text-transform: uppercase;
-        }
-        .card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(0deg, rgba(2,6,23,.92) 0%, transparent 55%);
-        }
-        .card-badges {
-            position: absolute; bottom: 8px; left: 8px; right: 8px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .cbadge {
-            font-size: 9px; font-weight: 800; padding: 2px 7px;
-            border-radius: 5px; letter-spacing: .3px;
-        }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .card-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(2,6,23,.92) 0%, transparent 55%); }
+        .card-badges { position: absolute; bottom: 8px; left: 8px; right: 8px; display: flex; justify-content: space-between; }
+        .cbadge { font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 5px; }
         .cbadge.blue  { background: var(--blue); color: #fff; }
         .cbadge.green { background: #16a34a; color: #fff; }
         .cbadge.dark  { background: rgba(0,0,0,.65); color: #94a3b8; }
-        .card-hover {
-            position: absolute; inset: 0;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity .2s; background: rgba(59,130,246,.12);
-        }
-        .ani-card:hover .card-hover { opacity: 1; }
-        .card-hover i { font-size: 44px; color: rgba(255,255,255,.85); }
-        .card-title {
-            font-size: 13px; font-weight: 800;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            transition: color .2s; margin-bottom: 3px;
-        }
+        .card-title { font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .card-sub { font-size: 11px; color: var(--muted); }
 
-        /* ── NO RESULTS ───────────────────────── */
-        .no-results { text-align: center; padding: 60px 20px; color: var(--muted); }
-        .no-results i { font-size: 40px; display: block; margin-bottom: 14px; opacity: .2; }
-
         /* ── DETAIL ───────────────────────────── */
-        #detail-section { display: none; }
-
+        #detail-section, #player-section { display: none; }
         .back-btn {
-            background: #1e293b; border: none; color: #94a3b8;
-            border-radius: 8px; padding: 9px 18px; font-size: 13px; cursor: pointer;
-            font-family: 'Nunito', sans-serif; font-weight: 700;
-            display: inline-flex; align-items: center; gap: 8px;
+            background: #1e293b; border: none; color: #94a3b8; border-radius: 8px; padding: 9px 18px;
+            font-size: 13px; cursor: pointer; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;
             margin-bottom: 28px; transition: all .2s;
         }
         .back-btn:hover { background: #334155; color: #fff; }
 
         .detail-hero { display: flex; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
-        .detail-poster {
-            width: 190px; flex-shrink: 0; border-radius: 14px;
-            overflow: hidden; border: 1px solid var(--border);
-            aspect-ratio: 2/3; background: #0f172a;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .detail-poster { width: 190px; flex-shrink: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 2/3; }
         .detail-poster img { width: 100%; height: 100%; object-fit: cover; }
-        .detail-poster-fb {
-            display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px;
-        }
-        .detail-poster-fb i { font-size: 52px; color: var(--blue); opacity: .3; }
-        .detail-poster-fb span { font-size: 12px; color: #64748b; text-align: center; }
-
         .detail-info { flex: 1; min-width: 260px; }
-        .detail-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-        .dtag {
-            font-size: 10px; font-weight: 800; padding: 3px 10px;
-            border-radius: 6px; letter-spacing: .4px;
-        }
-        .dtag.blue  { background: var(--blue); color: #fff; }
-        .dtag.dark  { background: #1e293b; color: #94a3b8; border: 1px solid var(--border); }
-        .dtag.green { background: #16a34a; color: #fff; }
-
-        .detail-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 46px; letter-spacing: 1px; line-height: 1; margin-bottom: 10px;
-        }
-        .detail-meta {
-            font-size: 12px; color: var(--muted); margin-bottom: 14px;
-            display: flex; gap: 18px; flex-wrap: wrap;
-        }
-        .detail-meta span { display: flex; align-items: center; gap: 5px; }
-        .detail-meta i { color: var(--blue); font-size: 11px; }
-        .detail-desc {
-            color: #94a3b8; font-size: 14px; line-height: 1.75;
-            margin-bottom: 24px; max-width: 620px;
-        }
-        .detail-play {
-            background: var(--blue); color: #fff; border: none;
-            border-radius: 10px; padding: 13px 30px; font-size: 15px;
-            font-weight: 800; cursor: pointer; font-family: 'Nunito', sans-serif;
-            display: inline-flex; align-items: center; gap: 8px; transition: background .2s;
-        }
-        .detail-play:hover { background: var(--blue-dark); }
-
-        /* ── EPISODES ─────────────────────────── */
-        .ep-header {
-            font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px;
-            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
-        }
-        .ep-header i { color: var(--blue); font-size: 14px; }
+        .detail-title { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 1px; line-height: 1; margin-bottom: 10px; }
+        .detail-desc { color: #94a3b8; font-size: 14px; line-height: 1.75; margin-bottom: 24px; max-width: 620px; }
+        
         .ep-list { display: flex; flex-direction: column; gap: 6px; }
-
         .ep-item {
-            background: #0f172a; border: 1px solid var(--border);
-            border-radius: 10px; padding: 13px 16px;
-            display: flex; align-items: center; gap: 14px;
-            cursor: pointer; transition: all .2s;
+            background: #0f172a; border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px;
+            display: flex; align-items: center; gap: 14px; cursor: pointer; transition: all .2s;
         }
-        .ep-item:hover  { border-color: var(--blue); background: #1e293b; }
+        .ep-item:hover { border-color: var(--blue); background: #1e293b; }
         .ep-item.active { border-color: var(--blue); background: rgba(59,130,246,.1); }
         .ep-num {
-            width: 38px; height: 38px; border-radius: 8px;
-            background: #1e293b; border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Bebas Neue', sans-serif; font-size: 17px;
-            color: var(--blue); flex-shrink: 0; transition: all .2s;
+            width: 38px; height: 38px; border-radius: 8px; background: #1e293b; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px; color: var(--blue);
         }
-        .ep-item:hover .ep-num, .ep-item.active .ep-num {
-            background: var(--blue); color: #fff; border-color: var(--blue);
-        }
-        .ep-name  { flex: 1; font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .ep-file  { font-size: 10px; color: var(--muted); font-family: monospace; margin-top: 2px; }
-        .ep-arrow { color: #334155; font-size: 12px; transition: color .2s; }
-        .ep-item:hover .ep-arrow { color: var(--blue); }
 
         /* ── PLAYER ───────────────────────────── */
-        #player-section { display: none; }
-
-        .player-top {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 18px;
-        }
-        .player-info span {
-            display: block; font-size: 11px; color: var(--muted);
-            font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
-        }
-        .player-info strong { font-size: 17px; font-weight: 800; }
-
-        .video-wrap {
+        .video-container {
             background: #000; border-radius: 14px; overflow: hidden;
-            border: 1px solid var(--border); aspect-ratio: 16/9;
-            box-shadow: 0 0 80px rgba(59,130,246,.08);
+            border: 1px solid var(--border); aspect-ratio: 16/9; width: 100%;
+            position: relative;
         }
-        .video-wrap video { width: 100%; height: 100%; display: block; }
+        /* Iframe Styles for Embeds */
+        .video-container iframe, .video-container video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        }
 
         .player-footer {
             display: flex; align-items: center; justify-content: space-between;
             margin-top: 14px; padding: 14px 18px;
             background: #0f172a; border: 1px solid var(--border); border-radius: 12px;
-            flex-wrap: wrap; gap: 10px;
         }
-        .ep-nav { display: flex; gap: 8px; }
         .nav-btn {
             background: #1e293b; border: 1px solid var(--border); color: #94a3b8;
             border-radius: 8px; padding: 9px 18px; font-size: 12px; font-weight: 800;
-            cursor: pointer; font-family: 'Nunito', sans-serif; transition: all .2s;
-            display: flex; align-items: center; gap: 6px;
+            cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 6px;
         }
-        .nav-btn:hover:not(:disabled) { background: var(--blue); border-color: var(--blue); color: #fff; }
+        .nav-btn:hover:not(:disabled) { background: var(--blue); color: #fff; }
         .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
-        .fp { font-size: 11px; color: #334155; font-family: monospace; }
 
-        /* ── FOOTER ───────────────────────────── */
-        footer {
-            border-top: 1px solid var(--border); padding: 28px 20px;
-            text-align: center; color: var(--muted); font-size: 12px;
-        }
+        footer { border-top: 1px solid var(--border); padding: 28px 20px; text-align: center; color: var(--muted); font-size: 12px; }
         footer span { color: var(--blue); font-weight: 800; }
     </style>
 </head>
@@ -381,262 +253,170 @@
         <div class="logo" onclick="goHome()"><span>ANI</span>WORLD</div>
         <div class="nav-search">
             <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Anime suchen..." oninput="filterLibrary()">
+            <input type="text" id="search-input" placeholder="Anime suchen..." oninput="renderLibrary()">
         </div>
-        <div class="soon-pill">
-            <i class="fas fa-fire"></i> Mehr Animes kommen bald!
-        </div>
+        <div class="soon-pill"><i class="fas fa-fire"></i> Neue Folgen täglich!</div>
     </div>
 </nav>
 
 <main>
-
-    <!-- HOME -->
+    <!-- HOME SECTION -->
     <div id="home-section">
-
         <div class="hero">
             <div class="hero-content">
                 <div class="hero-eyebrow">Willkommen bei AniWorld</div>
-                <div class="hero-title">Deine kostenlose<br><span>Anime Mediathek</span></div>
-                <div class="hero-desc">
-                    Schau deine Lieblingsanimes direkt im Browser – kostenlos und ohne Anmeldung.
-                    Wir erweitern die Bibliothek regelmäßig mit neuen Serien und Episoden.
-                    Schau öfter vorbei, es wird immer mehr!
-                </div>
+                <div class="hero-title">Deine <span>Anime Mediathek</span></div>
+                <div class="hero-desc">Entdecke hunderte Episoden deiner Lieblingsserien. Jetzt auch mit Support für externe Video-Hoster wie Vidmoly.</div>
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="num" id="stat-series">0</div>
-                        <div class="lbl">Serien</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="num" id="stat-eps">0</div>
-                        <div class="lbl">Episoden</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="num">∞</div>
-                        <div class="lbl">Geplant</div>
-                    </div>
+                    <div class="hero-stat"><div class="num" id="stat-series">0</div><div class="lbl">Serien</div></div>
+                    <div class="hero-stat"><div class="num" id="stat-eps">0</div><div class="lbl">Episoden</div></div>
                 </div>
             </div>
         </div>
 
-        <!-- COMING SOON TICKER -->
         <div class="ticker">
-            <i class="fas fa-satellite-dish" style="color:var(--blue);font-size:18px;flex-shrink:0"></i>
-            <div class="ticker-label">
-                <strong>Demnächst</strong>
-                <span>Wird noch hinzugefügt</span>
-            </div>
-            <div class="ticker-scroll">
-                <div class="ticker-inner" id="ticker-inner"></div>
-            </div>
+            <div class="ticker-label"><strong>Demnächst</strong><span>Coming Soon</span></div>
+            <div class="ticker-scroll"><div class="ticker-inner" id="ticker-inner"></div></div>
         </div>
 
         <div class="section-header">
-            <div class="section-title">
-                Alle Animes
-                <span class="count-pill" id="lib-count">0</span>
-            </div>
+            <div class="section-title">Bibliothek <span class="count-pill" id="lib-count">0</span></div>
         </div>
-
         <div class="chips" id="chips"></div>
         <div class="grid" id="anime-grid"></div>
-        <div class="no-results" id="no-results" style="display:none">
-            <i class="fas fa-search"></i>
-            Kein Anime gefunden.
-        </div>
-
     </div>
 
-    <!-- DETAIL -->
+    <!-- DETAIL SECTION -->
     <div id="detail-section">
-        <button class="back-btn" onclick="goHome()">
-            <i class="fas fa-arrow-left"></i> Zur Übersicht
-        </button>
+        <button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Zurück</button>
         <div class="detail-hero">
             <div class="detail-poster" id="detail-poster"></div>
             <div class="detail-info">
-                <div class="detail-tags" id="detail-tags"></div>
+                <div id="detail-tags" class="chips" style="margin-bottom:10px"></div>
                 <div class="detail-title" id="detail-title"></div>
-                <div class="detail-meta" id="detail-meta"></div>
                 <div class="detail-desc" id="detail-desc"></div>
-                <button class="detail-play" onclick="startEpisode(0)">
-                    <i class="fas fa-play"></i> Episode 1 ansehen
+                <button class="nav-btn" style="background:var(--blue);color:white;padding:12px 24px" onclick="startEpisode(0)">
+                    <i class="fas fa-play"></i> Erste Folge starten
                 </button>
             </div>
         </div>
-        <div class="ep-header">
-            <i class="fas fa-list"></i>
-            Episoden
-            <span class="count-pill" id="ep-count">0</span>
-        </div>
+        <div class="section-title" style="margin-bottom:15px">Episodenliste</div>
         <div class="ep-list" id="ep-list"></div>
     </div>
 
-    <!-- PLAYER -->
+    <!-- PLAYER SECTION -->
     <div id="player-section">
-        <div class="player-top">
-            <div style="display:flex;align-items:center;gap:14px">
-                <button class="back-btn" style="margin:0" onclick="goDetail()">
-                    <i class="fas fa-arrow-left"></i> Zurück
-                </button>
-                <div class="player-info">
-                    <span id="player-anime-name"></span>
-                    <strong id="player-ep-title"></strong>
-                </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px">
+            <button class="back-btn" style="margin:0" onclick="goDetail()"><i class="fas fa-arrow-left"></i> Zurück zur Info</button>
+            <div style="text-align:right">
+                <div id="player-anime-name" style="font-size:11px; color:var(--muted); font-weight:800"></div>
+                <div id="player-ep-title" style="font-weight:800"></div>
             </div>
         </div>
-        <div class="video-wrap">
-            <video id="main-video" controls autoplay></video>
+        
+        <div class="video-container" id="video-container">
+            <!-- Hier wird entweder ein <video> oder ein <iframe> eingefügt -->
         </div>
+
         <div class="player-footer">
-            <div class="ep-nav">
-                <button class="nav-btn" id="prev-btn" disabled>
-                    <i class="fas fa-step-backward"></i> Vorherige
-                </button>
-                <button class="nav-btn" id="next-btn" disabled>
-                    Nächste <i class="fas fa-step-forward"></i>
-                </button>
-            </div>
-            <div class="fp" id="fp"></div>
+            <button class="nav-btn" id="prev-btn"><i class="fas fa-step-backward"></i> Zurück</button>
+            <div id="host-info" style="font-size:10px; color:var(--muted)">Stream via Host</div>
+            <button class="nav-btn" id="next-btn">Weiter <i class="fas fa-step-forward"></i></button>
         </div>
     </div>
-
 </main>
 
-<footer>
-    <span>AniWorld</span> · Neue Serien & Episoden werden laufend hinzugefügt · Schau regelmäßig vorbei!
-</footer>
+<footer><span>AniWorld</span> &copy; 2024 - Deine private Mediathek</footer>
 
 <script>
-// ╔══════════════════════════════════════════════════════════════╗
-// ║               ANIME DATENBANK  –  NUR HIER EDITIEREN        ║
-// ╠══════════════════════════════════════════════════════════════╣
-// ║  Neue Serie:   { id, name, year, genres[], thumbnail,       ║
-// ║                  description, isNew, episodes[] }           ║
-// ║  Neue Episode: { title, file }                              ║
-// ║  file-Pfad:    relativ zur index.html                       ║
-// ║                z.B. "attack on tittan/01 - Titel.mp4"       ║
-// ║  thumbnail:    URL oder relativer Pfad  "cover/aot.jpg"     ║
-// ╚══════════════════════════════════════════════════════════════╝
-
+/**
+ * DATENBANK
+ * Hier kannst du einfach neue Serien und Folgen hinzufügen.
+ * file: Kann ein lokaler Pfad (z.B. "ordner/video.mp4") ODER ein Web-Link (Embed-URL) sein.
+ */
 const LIBRARY = [
+    {
+        id: "naruto-shippuden",
+        name: "Naruto Shippuden",
+        year: 2007,
+        genres: ["Action", "Shonen", "Abenteuer"],
+        thumbnail: "https://m.media-amazon.com/images/M/MV5BMjRiMzc2YWQtOTkzNC00OWQxLWE0NWYtODc4Njc0YzI0MGY5XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_FMjpg_UX1000_.jpg",
+        description: "Nach zwei Jahren Training mit Jiraiya kehrt Naruto nach Konoha zurück, um seinen Freund Sasuke zu retten und die Organisation Akatsuki zu stoppen.",
+        isNew: true,
+        episodes: [
+            { title: "Heimkehr", file: "https://vidmoly.biz/embed-6v20ngjp238k.html" },
+            { title: "Die Akatsuki kommen", file: "https://vidmoly.biz/embed-kgo20dd3oman.html" },
+            { title: "Die Ergebnisse des Trainings", file: "https://vidmoly.biz/embed-673a55qwlbu3.html" },
+            { title: "Die Jinchuriki des Sandes", file: "https://vidmoly.biz/embed-pzxg6d913afs.html" }
+        ]
+    },
     {
         id: "aot",
         name: "Attack on Titan",
         year: 2013,
         genres: ["Action", "Drama", "Fantasy"],
         thumbnail: "https://m.media-amazon.com/images/M/MV5BNDFjYTIxMjctYTQ2ZC00OGQ4LWE3OGYtNDdiMzNiNDBkZGUyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg",
-        description: "Vor vielen Jahren wurde die Menschheit von riesigen Kreaturen – den Titanen – fast ausgerottet. Die Überlebenden flüchteten hinter drei gewaltige Mauern. Doch als ein kolossaler Titan die äußere Mauer durchbricht, beginnt für Eren Jäger ein Kampf ums Überleben der Menschheit.",
-        isNew: true,
-        episodes: [
-            { title: "An dich in 2000 Jahren – Der Fall der Mauer Maria",          file: "attack on tittan/01 - An dich in 2000 Jahren.mp4" },
-            { title: "Jener Tag – Der Fall der Mauer Maria",                        file: "attack on tittan/02 - Jener Tag.mp4" },
-            { title: "Ein fahles Licht im Abendrot",                                file: "attack on tittan/03 - Ein fahles Licht im Abendrot.mp4" },
-        ]
-    },
-    {
-        id: "naruto",
-        name: "Naruto",
-        year: 2002,
-        genres: ["Action", "Abenteuer", "Shonen"],
-        thumbnail: "https://m.media-amazon.com/images/M/MV5BZmQ5NGFiNWEtMmMyMC00YzcwLWI0OTYtZDhlMzAxOTczMTk2XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg",
-        description: "Naruto Uzumaki ist ein junger Ninja mit einem versiegelten Neunteiligen Fuchsdämon in sich. Obwohl er vom Dorf gemieden wird, träumt er davon, Hokage zu werden – der stärkste Ninja und Anführer seines Dorfes. Ein Abenteuer über Freundschaft, Ausdauer und Wachstum.",
+        description: "Die Menschheit kämpft gegen riesige Titanen. Eren Jäger schwört Rache, nachdem seine Heimat zerstört wurde.",
         isNew: false,
         episodes: [
-            { title: "Naruto Uzumaki!",              file: "naruto/Episode 001 - Naruto Uzumaki.mp4" },
-            { title: "Mein Name ist Konohamaru!",    file: "naruto/Episode 002 - Mein Name ist Konohamaru.mp4" },
+            { title: "An dich in 2000 Jahren", file: "https://vidmoly.biz/embed-l936jo4zdsc0.html" },
+            { title: "Der Tag des Falls", file: "https://vidmoly.biz/embed-8f6zin2csniw.html" },
+            { title: "Ein weißes Leuchten in der Verzweiflung", file: "https://vidmoly.biz/embed-na3ap6ju7tcx.html" },
+            { title: "Die Nacht der Abschlusszeremonie", file: "https://vidmoly.biz/embed-0bdhyf6of23w.html" }
         ]
-    },
-
-    // ──────────────────────────────────────────────────────────
-    //  NEUE SERIE HIER EINTRAGEN – Block einfach kopieren:
-    // ──────────────────────────────────────────────────────────
-    // {
-    //     id: "demonslayer",
-    //     name: "Demon Slayer",
-    //     year: 2019,
-    //     genres: ["Action", "Fantasy"],
-    //     thumbnail: "cover/demonslayer.jpg",   // oder https://...
-    //     description: "Tanjiro Kamado...",
-    //     isNew: true,
-    //     episodes: [
-    //         { title: "Grausamkeit",         file: "demon slayer/01 - Grausamkeit.mp4" },
-    //         { title: "Wähle die Übung",     file: "demon slayer/02 - Uebung.mp4" },
-    //     ]
-    // },
+    }
 ];
 
-// Animes die demnächst kommen (Ticker oben)
-const COMING_SOON = [
-    "Demon Slayer", "One Piece", "Dragon Ball Z", "My Hero Academia",
-    "Death Note", "Fullmetal Alchemist: Brotherhood", "Hunter x Hunter",
-    "Bleach", "Tokyo Ghoul", "Sword Art Online", "Black Clover", "Fairy Tail",
-    "Jujutsu Kaisen", "Chainsaw Man", "Vinland Saga", "Re:Zero", "Overlord",
-];
-
-// ══════════════════════════════════════════════════════════════
-//  AB HIER NICHTS ÄNDERN
-// ══════════════════════════════════════════════════════════════
+const COMING_SOON = ["One Piece", "Demon Slayer", "Jujutsu Kaisen", "Bleach TYBW", "Solo Leveling"];
 
 let currentAnime = null;
-let activeGenre  = 'Alle';
+let currentEpIdx = 0;
+let activeGenre = 'Alle';
 
-// ── INIT ──
 function init() {
     buildTicker();
     buildChips();
     renderLibrary();
+    updateStats();
+}
+
+function updateStats() {
     document.getElementById('stat-series').textContent = LIBRARY.length;
-    document.getElementById('stat-eps').textContent    = LIBRARY.reduce((s,a) => s + a.episodes.length, 0);
-    show('home-section');
+    document.getElementById('stat-eps').textContent = LIBRARY.reduce((s, a) => s + a.episodes.length, 0);
 }
 
 function buildTicker() {
     const items = [...COMING_SOON, ...COMING_SOON];
-    document.getElementById('ticker-inner').innerHTML =
-        items.map(n => `<span class="ticker-item"><i class="fas fa-circle"></i>${n}</span>`).join('');
+    document.getElementById('ticker-inner').innerHTML = items.map(n => `<span class="ticker-item"><i class="fas fa-circle"></i>${n}</span>`).join('');
 }
 
 function buildChips() {
-    const genres = ['Alle', ...new Set(LIBRARY.flatMap(a => a.genres))].sort((a,b) => a==='Alle'?-1:a.localeCompare(b));
-    document.getElementById('chips').innerHTML =
-        genres.map(g => `<button class="chip${g==='Alle'?' active':''}" onclick="setGenre('${g}')">${g}</button>`).join('');
+    const genres = ['Alle', ...new Set(LIBRARY.flatMap(a => a.genres))].sort();
+    document.getElementById('chips').innerHTML = genres.map(g => `<button class="chip ${g==='Alle'?'active':''}" onclick="filterByGenre('${g}')">${g}</button>`).join('');
 }
 
-function setGenre(g) {
+function filterByGenre(g) {
     activeGenre = g;
     document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.textContent === g));
     renderLibrary();
 }
 
-// ── LIBRARY ──
 function renderLibrary() {
-    const q = document.getElementById('search-input').value.toLowerCase();
+    const query = document.getElementById('search-input').value.toLowerCase();
     let list = LIBRARY;
     if (activeGenre !== 'Alle') list = list.filter(a => a.genres.includes(activeGenre));
-    if (q) list = list.filter(a => a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q));
+    if (query) list = list.filter(a => a.name.toLowerCase().includes(query));
 
     document.getElementById('lib-count').textContent = list.length;
-    const grid = document.getElementById('anime-grid');
-    const noRes = document.getElementById('no-results');
-
-    if (!list.length) { grid.innerHTML = ''; noRes.style.display = 'block'; return; }
-    noRes.style.display = 'none';
-
-    grid.innerHTML = list.map(a => `
+    document.getElementById('anime-grid').innerHTML = list.map(a => `
         <div class="ani-card" onclick="openAnime('${a.id}')">
             <div class="card-thumb">
-                ${a.thumbnail
-                    ? `<img src="${a.thumbnail}" alt="${a.name}"
-                            onerror="this.outerHTML='<div class=card-fallback><i class=fas fa-film></i><span>${a.name}</span></div>'">`
-                    : `<div class="card-fallback"><i class="fas fa-film"></i><span>${a.name}</span></div>`}
+                <img src="${a.thumbnail}" alt="${a.name}">
                 <div class="card-overlay"></div>
                 <div class="card-badges">
-                    ${a.isNew ? '<span class="cbadge green">NEU</span>' : '<span class="cbadge blue">TV</span>'}
+                    <span class="cbadge ${a.isNew?'green':'blue'}">${a.isNew?'NEU':'TV'}</span>
                     <span class="cbadge dark">${a.episodes.length} EP</span>
                 </div>
-                <div class="card-hover"><i class="fas fa-play-circle"></i></div>
             </div>
             <div class="card-title">${a.name}</div>
             <div class="card-sub">${a.year} · ${a.genres[0]}</div>
@@ -644,89 +424,77 @@ function renderLibrary() {
     `).join('');
 }
 
-function filterLibrary() { renderLibrary(); }
-
-// ── DETAIL ──
 function openAnime(id) {
     currentAnime = LIBRARY.find(a => a.id === id);
-    if (!currentAnime) return;
-    show('detail-section');
-
-    const a = currentAnime;
-    document.getElementById('detail-poster').innerHTML = a.thumbnail
-        ? `<img src="${a.thumbnail}" alt="${a.name}">`
-        : `<div class="detail-poster-fb"><i class="fas fa-film"></i><span>${a.name}</span></div>`;
-
-    document.getElementById('detail-tags').innerHTML =
-        `<span class="dtag blue">TV SERIE</span>` +
-        a.genres.map(g => `<span class="dtag dark">${g}</span>`).join('') +
-        (a.isNew ? '<span class="dtag green">NEU</span>' : '');
-
-    document.getElementById('detail-title').textContent = a.name;
-    document.getElementById('detail-meta').innerHTML =
-        `<span><i class="fas fa-calendar"></i>${a.year}</span>
-         <span><i class="fas fa-list"></i>${a.episodes.length} Episoden</span>
-         <span><i class="fas fa-tag"></i>${a.genres.join(', ')}</span>`;
-    document.getElementById('detail-desc').textContent = a.description;
-    document.getElementById('ep-count').textContent = a.episodes.length;
-
-    document.getElementById('ep-list').innerHTML = a.episodes.map((ep, i) => `
-        <div class="ep-item" id="ep-${i}" onclick="startEpisode(${i})">
-            <div class="ep-num">${String(i+1).padStart(2,'0')}</div>
-            <div style="flex:1;min-width:0">
-                <div class="ep-name">${ep.title}</div>
-                <div class="ep-file">${ep.file}</div>
+    showSection('detail-section');
+    document.getElementById('detail-poster').innerHTML = `<img src="${currentAnime.thumbnail}">`;
+    document.getElementById('detail-title').textContent = currentAnime.name;
+    document.getElementById('detail-desc').textContent = currentAnime.description;
+    document.getElementById('ep-list').innerHTML = currentAnime.episodes.map((ep, i) => `
+        <div class="ep-item" onclick="startEpisode(${i})">
+            <div class="ep-num">${i+1}</div>
+            <div style="flex:1">
+                <div style="font-weight:bold; font-size:14px">${ep.title}</div>
+                <div style="font-size:10px; color:var(--muted)">${ep.file.includes('http') ? 'Externer Stream' : 'Lokale Datei'}</div>
             </div>
-            <i class="fas fa-play ep-arrow"></i>
+            <i class="fas fa-play" style="color:var(--blue)"></i>
         </div>
     `).join('');
 }
 
-// ── PLAYER ──
 function startEpisode(idx) {
-    if (!currentAnime) return;
+    currentEpIdx = idx;
     const ep = currentAnime.episodes[idx];
-
-    document.querySelectorAll('.ep-item').forEach((el,i) => el.classList.toggle('active', i === idx));
-    show('player-section');
-
-    const vid = document.getElementById('main-video');
-    vid.src = ep.file;
-    vid.play();
-
+    showSection('player-section');
+    
     document.getElementById('player-anime-name').textContent = currentAnime.name;
-    document.getElementById('player-ep-title').textContent   = `EP ${String(idx+1).padStart(2,'0')} – ${ep.title}`;
-    document.getElementById('fp').textContent                 = ep.file;
+    document.getElementById('player-ep-title').textContent = `Folge ${idx+1}: ${ep.title}`;
+    
+    const container = document.getElementById('video-container');
+    
+    // Logik für Embed vs Lokale Datei
+    if (ep.file.includes('http')) {
+        // Iframe für Vidmoly etc.
+        container.innerHTML = `<iframe src="${ep.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
+        document.getElementById('host-info').textContent = "Stream via Vidmoly/Web";
+    } else {
+        // Lokaler Video Player
+        container.innerHTML = `<video id="main-video" controls autoplay src="${ep.file}"></video>`;
+        document.getElementById('host-info').textContent = "Lokaler Server";
+    }
 
-    const prev = document.getElementById('prev-btn');
-    const next = document.getElementById('next-btn');
-    prev.disabled = idx <= 0;
-    next.disabled = idx >= currentAnime.episodes.length - 1;
-    prev.onclick  = () => startEpisode(idx - 1);
-    next.onclick  = () => startEpisode(idx + 1);
-    vid.onended   = () => { if (idx < currentAnime.episodes.length - 1) startEpisode(idx + 1); };
+    // Navigation Buttons
+    document.getElementById('prev-btn').disabled = idx === 0;
+    document.getElementById('prev-btn').onclick = () => startEpisode(idx - 1);
+    
+    document.getElementById('next-btn').disabled = idx === currentAnime.episodes.length - 1;
+    document.getElementById('next-btn').onclick = () => startEpisode(idx + 1);
 }
 
-// ── NAVIGATION ──
-function show(id) {
-    ['home-section','detail-section','player-section'].forEach(s => {
-        document.getElementById(s).style.display = s === id ? 'block' : 'none';
+function showSection(id) {
+    ['home-section', 'detail-section', 'player-section'].forEach(s => {
+        document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
     });
     window.scrollTo(0,0);
 }
-function goHome() {
-    const v = document.getElementById('main-video');
-    v.pause(); v.src = '';
-    show('home-section');
+
+function goHome() { 
+    stopVideo();
+    showSection('home-section'); 
 }
-function goDetail() {
-    const v = document.getElementById('main-video');
-    v.pause(); v.src = '';
-    if (currentAnime) openAnime(currentAnime.id);
-    show('detail-section');
+
+function goDetail() { 
+    stopVideo();
+    showSection('detail-section'); 
+}
+
+function stopVideo() {
+    const container = document.getElementById('video-container');
+    container.innerHTML = ''; // Stoppt Iframe und Video sofort
 }
 
 init();
 </script>
+
 </body>
 </html>
