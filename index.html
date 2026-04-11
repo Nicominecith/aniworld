@@ -30,11 +30,34 @@
             overflow-x: hidden;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-body); }
         ::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* TOP AD BANNER */
+        #topAdBanner {
+            background: linear-gradient(90deg, #020617, #0a1628, #020617);
+            border-bottom: 1px solid rgba(59,130,246,0.15);
+            padding: 8px 24px; text-align: center; position: relative;
+            font-size: 13px; color: var(--text-muted); overflow: hidden;
+        }
+        #topAdBanner::before {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(90deg, transparent, rgba(59,130,246,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+        #topAdBanner strong { color: var(--primary); }
+        .banner-ad-label {
+            font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--primary); margin-right: 8px; opacity: 0.6;
+        }
+        .banner-close {
+            position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); cursor: pointer; font-size: 14px; z-index: 2;
+        }
+        .banner-close:hover { color: var(--text-main); }
 
         /* Navigation */
         nav {
@@ -60,13 +83,36 @@
         .search-bar input {
             width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
             padding: 10px 16px 10px 42px; border-radius: 12px; color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             transition: all 0.3s ease;
         }
+        .search-bar input::placeholder { color: var(--text-muted); }
         .search-bar input:focus {
             outline: none; border-color: var(--primary); background: rgba(255,255,255,0.1);
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
         .search-bar i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+
+        .lang-toggle {
+            display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+        }
+        .lang-btn {
+            padding: 6px 13px; font-size: 12px; font-weight: 800;
+            cursor: pointer; background: transparent; border: none;
+            color: var(--text-muted); transition: 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .lang-btn.active { background: var(--primary); color: #fff; }
+        .lang-btn:hover:not(.active) { color: var(--text-main); }
+
+        .live-pill {
+            font-size: 13px; font-weight: 800; color: var(--primary);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .live-dot { width: 7px; height: 7px; background: #ef4444; border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
         /* Content */
         main { max-width: 1400px; margin: 0 auto; padding: 30px 24px; min-height: 80vh; }
@@ -93,7 +139,6 @@
         .section-title { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
         .section-title::before { content: ''; width: 4px; height: 24px; background: var(--primary); border-radius: 2px; }
 
-        /* Filter */
         .filter-wrap { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 20px; }
         .filter-chip {
             padding: 8px 20px; border-radius: 30px; background: var(--bg-card);
@@ -112,7 +157,7 @@
         }
         .anime-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 12px 30px -10px rgba(0,0,0,0.5); }
         .card-img { position: relative; aspect-ratio: 2/3; overflow: hidden; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; display: block; }
         .anime-card:hover .card-img img { transform: scale(1.05); }
         .card-badge {
             position: absolute; top: 10px; right: 10px; background: var(--primary);
@@ -121,6 +166,21 @@
         .card-info { padding: 15px; }
         .card-name { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
         .card-meta { font-size: 12px; color: var(--text-muted); }
+
+        /* Native ad card */
+        .ad-native {
+            background: linear-gradient(135deg, #070d1c, var(--bg-card));
+            border-radius: 16px; border: 1px solid rgba(59,130,246,0.18);
+            cursor: pointer; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column;
+        }
+        .ad-native:hover { border-color: var(--primary); transform: translateY(-4px); }
+        .ad-native-img {
+            aspect-ratio: 2/3; background: linear-gradient(135deg, #070d1c, #0d1b38);
+            display: flex; align-items: center; justify-content: center; font-size: 42px;
+        }
+        .ad-native-body { padding: 15px; }
+        .ad-native-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 5px; }
+        .ad-native-text { font-weight: 700; font-size: 13px; color: var(--text-muted); line-height: 1.4; }
 
         /* Views */
         #detail-view, #player-view { display: none; animation: fadeIn 0.4s ease; }
@@ -133,8 +193,22 @@
         .back-link:hover { color: var(--primary); }
 
         .detail-layout { display: grid; grid-template-columns: 300px 1fr; gap: 50px; }
-        .detail-cover img { width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--border); }
-        
+        .detail-cover img { width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid var(--border); display: block; }
+
+        /* Sidebar ad */
+        .sidebar-ad {
+            margin-top: 14px; background: linear-gradient(135deg, #070d1c, var(--bg-card));
+            border: 1px solid rgba(59,130,246,0.15); border-radius: 14px;
+            padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.2s;
+        }
+        .sidebar-ad:hover { border-color: var(--primary); }
+        .sidebar-ad-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+        .sidebar-ad-text { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .sidebar-ad-btn {
+            display: inline-block; margin-top: 10px; background: var(--primary); color: #fff;
+            font-size: 11px; font-weight: 800; padding: 7px 16px; border-radius: 8px;
+        }
+
         .title-area h1 { font-size: 48px; font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
         .desc-text { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; line-height: 1.6; max-width: 800px; }
 
@@ -166,18 +240,82 @@
             margin-bottom: 25px; position: relative;
         }
         .video-box iframe { width: 100%; height: 100%; border: none; }
-        
+
         .player-ctrls {
             display: flex; align-items: center; justify-content: space-between;
             background: var(--bg-card); padding: 20px; border-radius: 16px; border: 1px solid var(--border);
+            margin-bottom: 10px;
         }
         .btn-action {
             background: var(--bg-hover); border: 1px solid var(--border); color: #fff;
             padding: 10px 24px; border-radius: 10px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; gap: 10px; transition: 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         .btn-action:hover:not(:disabled) { background: var(--primary); border-color: var(--primary); }
         .btn-action:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .key-hint {
+            text-align: center; font-size: 12px; color: var(--text-muted); margin-bottom: 20px;
+        }
+        .key-hint kbd {
+            background: var(--bg-hover); border: 1px solid var(--border);
+            padding: 2px 8px; border-radius: 5px; color: var(--text-main); font-size: 12px;
+        }
+
+        /* Player leaderboard ad */
+        .player-ad {
+            background: linear-gradient(90deg, #070d1c, #0a1628, #070d1c);
+            border: 1px solid rgba(59,130,246,0.12); border-radius: 12px;
+            padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer; transition: border-color 0.2s;
+        }
+        .player-ad:hover { border-color: var(--primary); }
+        .player-ad-left { display: flex; align-items: center; gap: 14px; }
+        .player-ad-icon { font-size: 24px; }
+        .player-ad-label { font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+        .player-ad-text { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+        .player-ad-btn {
+            background: var(--primary); color: #fff;
+            font-size: 12px; font-weight: 800; padding: 8px 18px; border-radius: 8px; white-space: nowrap;
+        }
+
+        /* Popup */
+        .popup-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9000;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px); animation: fadeIn 0.3s ease;
+        }
+        .popup-box {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; width: 90%; max-width: 460px;
+            padding: 40px; text-align: center; position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+        }
+        .popup-ad-label {
+            display: inline-block; background: var(--primary); color: #fff;
+            font-size: 9px; font-weight: 800; padding: 3px 10px; border-radius: 4px;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+        }
+        .popup-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 10px; }
+        .popup-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 26px; line-height: 1.6; }
+        .popup-cta {
+            background: var(--primary); color: #fff; border: none;
+            padding: 13px 30px; border-radius: 10px; font-weight: 700; cursor: pointer;
+            font-size: 15px; transition: 0.2s; font-family: 'Plus Jakarta Sans', sans-serif;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .popup-cta:hover { background: #2563eb; transform: translateY(-2px); }
+        .popup-skip { display: block; margin-top: 16px; color: var(--text-muted); font-size: 13px; cursor: pointer; }
+        .popup-skip:hover { color: var(--text-main); }
+        .popup-skip strong { color: var(--primary); }
+        .popup-close {
+            position: absolute; top: 14px; right: 14px;
+            background: var(--bg-hover); border: 1px solid var(--border);
+            color: var(--text-muted); width: 30px; height: 30px; border-radius: 7px;
+            cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+        }
+        .popup-close:hover { color: var(--text-main); }
 
         footer { text-align: center; padding: 60px 24px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
 
@@ -187,11 +325,18 @@
             .hero-banner { padding: 30px; }
             .hero-title { font-size: 40px; }
             .title-area h1 { font-size: 32px; }
-            .hide-mobile { display: none; }
+            .hide-mobile { display: none !important; }
         }
     </style>
 </head>
 <body>
+
+<!-- TOP AD BANNER -->
+<div id="topAdBanner">
+    <span class="banner-ad-label">Werbung</span>
+    <span id="bannerText">🎮 <strong>G2A.com</strong> — Günstige Gaming Keys &amp; Software. Spare bis zu 80%! Jetzt entdecken →</span>
+    <span class="banner-close" onclick="document.getElementById('topAdBanner').style.display='none'"><i class="fas fa-times"></i></span>
+</div>
 
 <nav>
     <div class="nav-content">
@@ -200,8 +345,15 @@
             <i class="fas fa-search"></i>
             <input type="text" id="searchInput" placeholder="Suche nach Anime..." oninput="renderLibrary()">
         </div>
-        <div style="font-size: 13px; font-weight: 800; color: var(--primary);" class="hide-mobile">
-            <i class="fas fa-bolt"></i> TÄGLICH NEUE FOLGEN
+        <div class="nav-right">
+            <div class="lang-toggle">
+                <button class="lang-btn active" id="btnDE" onclick="setLang('de')">DE</button>
+                <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+            </div>
+            <div class="live-pill hide-mobile">
+                <div class="live-dot"></div>
+                <span id="livePillText"><i class="fas fa-bolt"></i> TÄGLICH NEUE FOLGEN</span>
+            </div>
         </div>
     </div>
 </nav>
@@ -210,35 +362,40 @@
     <!-- HOME VIEW -->
     <div id="home-view">
         <div class="hero-banner">
-            <div class="hero-title">Deine <span>Anime Welt</span></div>
-            <div class="hero-subtitle">Erlebe die besten Serien in deiner privaten Mediathek. Komplett werbefrei und für dich optimiert.</div>
+            <div class="hero-title" id="heroTitle">Deine <span>Anime Welt</span></div>
+            <div class="hero-subtitle" id="heroSub">Erlebe die besten Serien in deiner privaten Mediathek. Komplett für dich kuratiert.</div>
             <div class="stats-grid">
-                <div class="stat-item"><div class="val" id="statSeries">0</div><div class="lab">Animes</div></div>
-                <div class="stat-item"><div class="val" id="statEps">0</div><div class="lab">Folgen auf unserer Seite</div></div>
+                <div class="stat-item"><div class="val" id="statSeries">0</div><div class="lab" id="statSeriesLab">Animes</div></div>
+                <div class="stat-item"><div class="val" id="statEps">0</div><div class="lab" id="statEpsLab">Folgen gesamt</div></div>
             </div>
         </div>
 
         <div class="section-head">
-            <div class="section-title">Bibliothek</div>
+            <div class="section-title" id="libTitle">Bibliothek</div>
         </div>
-        
         <div class="filter-wrap" id="genreFilters"></div>
         <div class="anime-grid" id="animeGrid"></div>
     </div>
 
     <!-- DETAIL VIEW -->
     <div id="detail-view">
-        <div class="back-link" onclick="showHome()"><i class="fas fa-chevron-left"></i> Zurück zur Übersicht</div>
+        <div class="back-link" onclick="showHome()"><i class="fas fa-chevron-left"></i> <span id="backHomeLabel">Zurück zur Übersicht</span></div>
         <div class="detail-layout">
-            <div class="detail-cover" id="detailCover"></div>
+            <div>
+                <div class="detail-cover" id="detailCover"></div>
+                <div class="sidebar-ad" onclick="void(0)">
+                    <div class="sidebar-ad-label">Werbung</div>
+                    <div class="sidebar-ad-text" id="sidebarAdText">🛡️ NordVPN — Sicher &amp; anonym streamen. Jetzt -68% sparen!</div>
+                    <div class="sidebar-ad-btn" id="sidebarAdBtn">Zum Angebot →</div>
+                </div>
+            </div>
             <div class="detail-content">
                 <div class="title-area">
                     <div id="detailGenres" style="display:flex; gap:8px; margin-bottom:15px; flex-wrap: wrap;"></div>
                     <h1 id="detailTitle">Anime Title</h1>
                     <p class="desc-text" id="detailDesc"></p>
                 </div>
-
-                <div class="section-title" style="margin-bottom:20px">Staffeln & Episoden</div>
+                <div class="section-title" style="margin-bottom:20px" id="seasonsLabel">Staffeln &amp; Episoden</div>
                 <div class="season-tabs" id="seasonTabs"></div>
                 <div class="episode-list" id="episodeList"></div>
             </div>
@@ -247,183 +404,269 @@
 
     <!-- PLAYER VIEW -->
     <div id="player-view">
-        <div class="back-link" onclick="showDetail()"><i class="fas fa-chevron-left"></i> Episodenauswahl</div>
-        
+        <div class="back-link" onclick="showDetail()"><i class="fas fa-chevron-left"></i> <span id="backEpLabel">Episodenauswahl</span></div>
         <div class="video-box" id="videoBox"></div>
-        
         <div class="player-ctrls">
-            <button class="btn-action" id="prevEp"><i class="fas fa-backward"></i> Vorherige</button>
+            <button class="btn-action" id="prevEp"><i class="fas fa-backward"></i> <span id="prevLabel">Vorherige</span></button>
             <div style="text-align:center">
                 <div id="playerMeta" style="font-size:12px; color:var(--text-muted); font-weight:700"></div>
                 <div id="playerTitle" style="font-size:18px; font-weight:800"></div>
             </div>
-            <button class="btn-action" id="nextEp">Nächste <i class="fas fa-forward"></i></button>
+            <button class="btn-action" id="nextEp"><span id="nextLabel">Nächste</span> <i class="fas fa-forward"></i></button>
+        </div>
+        <div class="key-hint" id="keyHint">
+            <kbd>←</kbd> / <kbd>→</kbd> Pfeiltasten zum Wechseln · <kbd>ESC</kbd> zurück zur Episodenliste
+        </div>
+        <div class="player-ad" onclick="void(0)">
+            <div class="player-ad-left">
+                <div class="player-ad-icon">🛡️</div>
+                <div>
+                    <div class="player-ad-label">Werbung</div>
+                    <div class="player-ad-text" id="playerAdText">NordVPN — Sicher streamen, anonym im Netz. Jetzt -68% sparen!</div>
+                </div>
+            </div>
+            <div class="player-ad-btn" id="playerAdBtn">Zum Angebot →</div>
         </div>
     </div>
 </main>
 
 <footer>
-    <p>&copy; 2024 ANIWORLD NICO</p>
-    <p style="margin-top:10px; font-size:11px; opacity: 0.6">Alle Streams werden von externen Hostern bereitgestellt.</p>
+    <p>&copy; 2025 ANIWORLD NICO</p>
+    <p style="margin-top:10px; font-size:11px; opacity:0.6" id="footerText">Alle Streams werden von externen Hostern bereitgestellt.</p>
 </footer>
 
+<!-- AD POPUP -->
+<div class="popup-overlay" id="adPopup" style="display:none">
+    <div class="popup-box">
+        <div class="popup-close" onclick="closePopup()"><i class="fas fa-times"></i></div>
+        <div class="popup-ad-label">Werbung</div>
+        <h3 id="popupTitle">Amazon Prime Video</h3>
+        <p id="popupText">Tausende Serien und Filme streamen — inklusive exklusiver Originals. 30 Tage komplett kostenlos!</p>
+        <button class="popup-cta" onclick="closePopup()"><i class="fas fa-play-circle"></i> <span id="popupBtn">30 Tage gratis testen</span></button>
+        <span class="popup-skip" onclick="closePopup()"><span id="popupSkipLabel">Überspringen</span> <strong id="skipTimer">(5)</strong></span>
+    </div>
+</div>
+
 <script>
-    // DATENBANK - Korrigiertes JSON
     const DATA = [
         {
-            id: "naruto-shippuden",
-            name: "Naruto Shippuden",
-            year: 2007,
-            genres: ["Action", "Shonen", "Adventure"],
-            thumbnail: "https://s1.directupload.eu/images/260411/wxwt79n8.jpg",
-            description: "Nach zwei Jahren Training mit Jiraiya kehrt Naruto nach Konoha zurück. Er ist stärker geworden, doch die Gefahr durch Akatsuki wächst...",
-            seasons: [
-                {
-                    name: "Staffel 1",
-                    episodes: [
-                        { title: "Heimkehr", file: "https://vidmoly.biz/embed-6v20ngjp238k.html" },
-                        { title: "Und schon wieder Trainingsplatz 3", file: "https://vidmoly.biz/embed-kgo20dd3oman.html" },
-                        { title: "Trainingserfolge", file: "https://vidmoly.biz/embed-673a55qwlbu3.html" },
-                        { title: "Die Jinchu-Kraft aus Suna-Gakure", file: "https://vidmoly.biz/embed-pzxg6d913afs.html" },
-                        { title: "Kazekage Gaara", file: "https://vidmoly.biz/embed-gkmgzhe9q7ng.html" },
-                        { title: "Endlich wieder Nudelsuppe!", file: "https://vidmoly.biz/embed-59qka7disucg.html" },
-                        { title: "Lauf, Kankuro, lauf!", file: "https://vidmoly.biz/embed-94jvrukocuyk.html" },
-                        { title: "Bereitmachen, Team Kakashi!", file: "https://vidmoly.biz/embed-84cup64k45xs.html" },
-                        { title: "Verehrte Großmutter", file: "https://vidmoly.biz/embed-92erqxv9lj9s.html" },
-                        { title: "Die neun Siegel des Phantomdrachens", file: "https://vidmoly.biz/embed-nf14kx0fsxbu.html" }
-                    ]
-                }
-            ]
-        },        {
-            id: "one-piece",
-            name: "One Piece",
-            year: 1997,
-            genres: ["Action", "Adventure", "Comedy", "Fantasy", "Shonen"],
-            thumbnail: "https://s1.directupload.eu/images/260411/wo94eui4.png",
-            description: "Monkey D. Ruffy hat nur ein Ziel: Er will der König der Piraten werden! Gemeinsam mit seiner Crew – der berühmt-berüchtigten Strohhutbande – begibt er sich auf die Suche nach dem legendärsten Schatz aller Zeiten: Dem sagenumwobenen One Piece!",
-            seasons: [
-                {
-                    name: "Staffel 1",
-                    episodes: [
-                        { title: "Hier kommt Ruffy, der künftige König der Piraten!", file: "https://vidmoly.biz/embed-su9v4wvuuiz2.html" },
-                        { title: "Piratenjäger Lorenor Zorro", file: "https://vidmoly.biz/embed-rzjyn5l1h7ci.html" },
-                        { title: "Käpt’n Morgan gegen Ruffy!", file: "https://vidmoly.biz/embed-0rxgyes6h8tu.html" },
-                        { title: "Der rote Shanks und sein Hut", file: "https://vidmoly.biz/embed-j0uyfjabhwtt.html" },
-                        { title: "Buggy, der Clown", file: "https://vidmoly.biz/embed-ep64420fwbt6.html" },
-                    ]
-                }
-            ]
+            id:"naruto-shippuden", name:"Naruto Shippuden", year:2007,
+            genres:["Action","Shonen","Adventure"],
+            thumbnail:"https://s1.directupload.eu/images/260411/wxwt79n8.jpg",
+            desc_de:"Nach zwei Jahren Training mit Jiraiya kehrt Naruto nach Konoha zurück. Er ist stärker geworden, doch die Gefahr durch Akatsuki wächst...",
+            desc_en:"After two years of training with Jiraiya, Naruto returns to Konoha stronger than ever. But the threat of Akatsuki grows darker...",
+            seasons:[{
+                name_de:"Staffel 1", name_en:"Season 1",
+                episodes:[
+                    {de:"Heimkehr",en:"Homecoming",file:"https://vidmoly.biz/embed-6v20ngjp238k.html"},
+                    {de:"Und schon wieder Trainingsplatz 3",en:"The Akatsuki Makes Its Move",file:"https://vidmoly.biz/embed-kgo20dd3oman.html"},
+                    {de:"Trainingserfolge",en:"The Results of Training",file:"https://vidmoly.biz/embed-673a55qwlbu3.html"},
+                    {de:"Die Jinchu-Kraft aus Suna-Gakure",en:"The Jinchuriki of the Sand",file:"https://vidmoly.biz/embed-pzxg6d913afs.html"},
+                    {de:"Kazekage Gaara",en:"Kazekage Gaara",file:"https://vidmoly.biz/embed-gkmgzhe9q7ng.html"},
+                    {de:"Endlich wieder Nudelsuppe!",en:"Mission Cleared!",file:"https://vidmoly.biz/embed-59qka7disucg.html"},
+                    {de:"Lauf, Kankuro, lauf!",en:"Run, Kankuro!",file:"https://vidmoly.biz/embed-94jvrukocuyk.html"},
+                    {de:"Bereitmachen, Team Kakashi!",en:"Team Kakashi, Assemble!",file:"https://vidmoly.biz/embed-84cup64k45xs.html"},
+                    {de:"Verehrte Großmutter",en:"The Honored Grandmother",file:"https://vidmoly.biz/embed-92erqxv9lj9s.html"},
+                    {de:"Die neun Siegel des Phantomdrachens",en:"The Nine Tails Unleashed",file:"https://vidmoly.biz/embed-nf14kx0fsxbu.html"}
+                ]
+            }]
         },
         {
-            id: "mashle",
-            name: "MASHLE: MAGIC AND MUSCLES",
-            year: 2020,
-            genres: ["Action", "Adventure", "Comedy", "Fantasy"],
-            thumbnail: "https://s1.directupload.eu/images/260411/ytk5vytk.jpg",
-            description: "In einer Welt, in der ein jeder über magische Fähigkeiten verfügt, lebt in den Tiefen eines Waldes der junge Mann Mash Burnedead. Er kann keinen Funken Magie anwenden und trainiert stattdessen zielstrebig, um seine Muskeln zu stählen. Eigentlich wollte er ein friedliches Leben mit seinem Vater genießen, doch als sein Geheimnis ans Licht kommt, wird Mash als einzigen Ausweg an der Magieschule...",
-            seasons: [
-                {
-                    name: "Staffel 1",
-                    episodes: [
-                        { title: "Mash Burnedead und seine Muskeln aus Stahl", file: "https://vidmoly.biz/embed-yi87ouiie04r.html" },
-                        { title: "Mash Burnedead und das wundersame Labyrinth", file: "https://vidmoly.biz/embed-a96tnapscscc.html" },
-                        { title: "Mash Burnedead und der, mit dem man sich nicht anlegen sollte", file: "https://vidmoly.biz/embed-pjjbq2zxqfid.html" },
-                        { title: "Mash Burnedead und der starke Magier", file: "https://vidmoly.biz/embed-7ow7d8zgcnjc.html" },
-                        { title: "Mash Burnedead und der unbeliebte Mitschüler", file: "https://vidmoly.biz/embed-5dhct4kxos01.html" },
-                    ]
-                }
-            ]
+            id:"one-piece", name:"One Piece", year:1997,
+            genres:["Action","Adventure","Comedy","Fantasy","Shonen"],
+            thumbnail:"https://s1.directupload.eu/images/260411/wo94eui4.png",
+            desc_de:"Monkey D. Ruffy hat nur ein Ziel: Er will der König der Piraten werden! Gemeinsam mit seiner Crew begibt er sich auf die Suche nach dem One Piece!",
+            desc_en:"Monkey D. Luffy has one goal: to become King of the Pirates! With his crew, he searches for the legendary One Piece treasure!",
+            seasons:[{
+                name_de:"Staffel 1", name_en:"Season 1",
+                episodes:[
+                    {de:"Hier kommt Ruffy, der künftige König der Piraten!",en:"I'm Luffy! The Man Who Will Become King of the Pirates!",file:"https://vidmoly.biz/embed-su9v4wvuuiz2.html"},
+                    {de:"Piratenjäger Lorenor Zorro",en:"Roronoa Zoro: The Great Swordsman!",file:"https://vidmoly.biz/embed-rzjyn5l1h7ci.html"},
+                    {de:"Käpt'n Morgan gegen Ruffy!",en:"Morgan vs. Luffy!",file:"https://vidmoly.biz/embed-0rxgyes6h8tu.html"},
+                    {de:"Der rote Shanks und sein Hut",en:"The Red-Haired Shanks Appears!",file:"https://vidmoly.biz/embed-j0uyfjabhwtt.html"},
+                    {de:"Buggy, der Clown",en:"Captain Buggy the Clown!",file:"https://vidmoly.biz/embed-ep64420fwbt6.html"}
+                ]
+            }]
         },
         {
-            id: "tokyo-guhl",
-            name: "Tokyo Ghoul",
-            year: 2011,
-            genres: ["Action", "Adventure", "Comedy", "Fantasy"],
-            thumbnail: "https://s1.directupload.eu/images/260411/5upe6cug.jpg",
-            description: "Übel zugerichtete und zerstückelte Leichen verbreiten in der japanischen Öffentlichkeit Angst und Schrecken. Die Leichen sind Opfer von Kannibalen – sogenannten GHULE - die äußerlich völlig unauffällig und nicht erkennbar unter den Menschen leben. Jeder Kollege, Mitschüler oder Nachbar, auch die nette Verkäuferin im Supermarkt könnte eine/r dieser Ghule sein. Das einzige, was Ghule von normalen Menschen unterscheidet, ist ihre Nahrung. Ghule begehren und vertragen nur Menschenfleisch.",
-            seasons: [
-                {
-                    name: "Staffel 1",
-                    episodes: [
-                        { title: "Tragödie", file: "https://vidmoly.biz/embed-i1mrtlwv675s.html" },
-                        { title: "Einsamkeit", file: "https://vidmoly.biz/embed-pms2e2o03jzg.html" },
-                        { title: "Tauben", file: "https://vidmoly.biz/embed-tq6u7aq0jpam.html" },
-                        { title: "Abendmahl", file: "https://vidmoly.biz/embed-xmir5afzkm3h.html" },
-                        { title: "Narbe", file: "https://vidmoly.biz/embed-0yf8von0prus.html" },
-                    ]
-                }
-            ]
+            id:"mashle", name:"MASHLE: MAGIC AND MUSCLES", year:2020,
+            genres:["Action","Adventure","Comedy","Fantasy"],
+            thumbnail:"https://s1.directupload.eu/images/260411/ytk5vytk.jpg",
+            desc_de:"In einer Welt voller Magie lebt Mash Burnedead ohne jeden Funken davon — und zeigt der Welt, dass Muskeln stärker sind als jeder Zauber.",
+            desc_en:"In a world full of magic, Mash Burnedead has none — and proves that muscles are stronger than any spell.",
+            seasons:[{
+                name_de:"Staffel 1", name_en:"Season 1",
+                episodes:[
+                    {de:"Mash Burnedead und seine Muskeln aus Stahl",en:"Mash Burnedead and His Steely Muscles",file:"https://vidmoly.biz/embed-yi87ouiie04r.html"},
+                    {de:"Mash Burnedead und das wundersame Labyrinth",en:"Mash Burnedead and the Marvelous Labyrinth",file:"https://vidmoly.biz/embed-a96tnapscscc.html"},
+                    {de:"Mash Burnedead und der, mit dem man sich nicht anlegen sollte",en:"Mash Burnedead and Someone You Shouldn't Cross",file:"https://vidmoly.biz/embed-pjjbq2zxqfid.html"},
+                    {de:"Mash Burnedead und der starke Magier",en:"Mash Burnedead and the Powerful Wizard",file:"https://vidmoly.biz/embed-7ow7d8zgcnjc.html"},
+                    {de:"Mash Burnedead und der unbeliebte Mitschüler",en:"Mash Burnedead and the Unpopular Classmate",file:"https://vidmoly.biz/embed-5dhct4kxos01.html"}
+                ]
+            }]
         },
         {
-            id: "aot",
-            name: "Attack on Titan",
-            year: 2013,
-            genres: ["Action", "Drama", "Mystery"],
-            thumbnail: "https://s1.directupload.eu/images/260411/yjuz9xdv.jpg",
-            description: "Seit Jahrhunderten wird die Menschheit von riesigen Titanen terrorisiert. Die Überlebenden haben sich hinter gewaltigen Mauern verschanzt.",
-            seasons: [
-                {
-                    name: "Staffel 1",
-                    episodes: [
-                        { title: "An dich in 2000 Jahren", file: "https://vidmoly.biz/embed-l936jo4zdsc0.html" },
-                        { title: "Der Tag des Falls", file: "https://vidmoly.biz/embed-8f6zin2csniw.html" },
-                        { title: "Ein weißes Leuchten in der Verzweiflung", file: "https://vidmoly.biz/embed-na3ap6ju7tcx.html" },
-                        { title: "Die Nacht der Abschlusszeremonie", file: "https://vidmoly.biz/embed-0bdhyf6of23w.html" },
-                        { title: "Feuertaufe", file: "https://vidmoly.biz/embed-r158bxrekbvi.html" },
-                        { title: "Die Welt durch die Augen eines Mädchens", file: "https://vidmoly.biz/embed-dypi3074gf22.html" },
-                        { title: "Eine kleine Klinge", file: "https://vidmoly.biz/embed-6pywzm2da5be.html" },
-                        { title: "Ich höre einen Herzschlag", file: "https://vidmoly.biz/embed-nhrlet8jo13l.html" },
-                        { title: "Der Verbleib des linken Arms", file: "https://vidmoly.biz/embed-xs4y8hfofot6.html" },
-                        { title: "Die Reaktion", file: "https://vidmoly.biz/embed-8old7cyvmuff.html" }
-                    ]
-                }
-            ]
+            id:"tokyo-ghoul", name:"Tokyo Ghoul", year:2011,
+            genres:["Action","Adventure","Comedy","Fantasy"],
+            thumbnail:"https://s1.directupload.eu/images/260411/5upe6cug.jpg",
+            desc_de:"Übel zugerichtete Leichen verbreiten in Tokyo Angst und Schrecken. Als Ken Kaneki zum Halb-Ghul wird, muss er zwischen zwei Welten leben.",
+            desc_en:"Mutilated bodies spread terror across Tokyo. When Ken Kaneki becomes a half-Ghoul, he must live between two worlds.",
+            seasons:[{
+                name_de:"Staffel 1", name_en:"Season 1",
+                episodes:[
+                    {de:"Tragödie",en:"Tragedy",file:"https://vidmoly.biz/embed-i1mrtlwv675s.html"},
+                    {de:"Einsamkeit",en:"Loneliness",file:"https://vidmoly.biz/embed-pms2e2o03jzg.html"},
+                    {de:"Tauben",en:"Dove",file:"https://vidmoly.biz/embed-tq6u7aq0jpam.html"},
+                    {de:"Abendmahl",en:"Supper",file:"https://vidmoly.biz/embed-xmir5afzkm3h.html"},
+                    {de:"Narbe",en:"Scar",file:"https://vidmoly.biz/embed-0yf8von0prus.html"}
+                ]
+            }]
+        },
+        {
+            id:"aot", name:"Attack on Titan", year:2013,
+            genres:["Action","Drama","Mystery"],
+            thumbnail:"https://s1.directupload.eu/images/260411/yjuz9xdv.jpg",
+            desc_de:"Seit Jahrhunderten wird die Menschheit von riesigen Titanen terrorisiert. Die Überlebenden haben sich hinter gewaltigen Mauern verschanzt.",
+            desc_en:"For centuries, humanity has been driven to the brink by giant Titans. The survivors hide behind massive walls — until the day those walls fall.",
+            seasons:[{
+                name_de:"Staffel 1", name_en:"Season 1",
+                episodes:[
+                    {de:"An dich in 2000 Jahren",en:"To You, in 2000 Years",file:"https://vidmoly.biz/embed-l936jo4zdsc0.html"},
+                    {de:"Der Tag des Falls",en:"The Day the Walls Fell",file:"https://vidmoly.biz/embed-8f6zin2csniw.html"},
+                    {de:"Ein weißes Leuchten in der Verzweiflung",en:"A Dim Light in the Darkness of Despair",file:"https://vidmoly.biz/embed-na3ap6ju7tcx.html"},
+                    {de:"Die Nacht der Abschlusszeremonie",en:"The Night Before Graduation",file:"https://vidmoly.biz/embed-0bdhyf6of23w.html"},
+                    {de:"Feuertaufe",en:"First Battle: The Struggle for Trost",file:"https://vidmoly.biz/embed-r158bxrekbvi.html"},
+                    {de:"Die Welt durch die Augen eines Mädchens",en:"The World the Girl Saw",file:"https://vidmoly.biz/embed-dypi3074gf22.html"},
+                    {de:"Eine kleine Klinge",en:"The Small Blade",file:"https://vidmoly.biz/embed-6pywzm2da5be.html"},
+                    {de:"Ich höre einen Herzschlag",en:"I Can Hear His Heartbeat",file:"https://vidmoly.biz/embed-nhrlet8jo13l.html"},
+                    {de:"Der Verbleib des linken Arms",en:"Where Is the Left Arm's Origin",file:"https://vidmoly.biz/embed-xs4y8hfofot6.html"},
+                    {de:"Die Reaktion",en:"Response",file:"https://vidmoly.biz/embed-8old7cyvmuff.html"}
+                ]
+            }]
         }
     ];
 
-    let currentAnime = null;
-    let currentSeasonIdx = 0;
-    let currentEpIdx = 0;
-    let activeGenre = "Alle";
+    const T = {
+        de: {
+            heroTitle:'Deine <span>Anime Welt</span>',
+            heroSub:'Erlebe die besten Serien in deiner privaten Mediathek. Komplett für dich kuratiert.',
+            statSeriesLab:'Animes', statEpsLab:'Folgen gesamt',
+            libTitle:'Bibliothek', filterAll:'Alle',
+            seasonWord:'Staffel', seasonsWord:'Staffeln',
+            backHome:'Zurück zur Übersicht', backEp:'Episodenauswahl',
+            seasonsLabel:'Staffeln &amp; Episoden',
+            prev:'Vorherige', next:'Nächste',
+            livePill:'<i class="fas fa-bolt"></i> TÄGLICH NEUE FOLGEN',
+            keyHint:'<kbd>←</kbd> / <kbd>→</kbd> Pfeiltasten zum Wechseln · <kbd>ESC</kbd> zurück zur Episodenliste',
+            footerText:'Alle Streams werden von externen Hostern bereitgestellt.',
+            banner:'🎮 <strong>G2A.com</strong> — Günstige Gaming Keys &amp; Software. Spare bis zu 80%! Jetzt entdecken →',
+            sidebarAd:'🛡️ NordVPN — Sicher &amp; anonym streamen. Jetzt -68% sparen!',
+            sidebarBtn:'Zum Angebot →',
+            playerAd:'NordVPN — Sicher streamen, anonym im Netz. Jetzt -68% sparen!',
+            playerAdBtn:'Zum Angebot →',
+            nativeAd:'Amazon Prime — Serien &amp; Filme ohne Ende streamen!',
+            popupTitle:'Amazon Prime Video',
+            popupText:'Tausende Serien und Filme streamen — inklusive exklusiver Originals. 30 Tage komplett kostenlos!',
+            popupBtn:'30 Tage gratis testen',
+            popupSkip:'Überspringen',
+            folge:'FOLGE', searchPlaceholder:'Suche nach Anime...',
+        },
+        en: {
+            heroTitle:'Your <span>Anime World</span>',
+            heroSub:'Experience the best series in your private media library. Curated just for you.',
+            statSeriesLab:'Animes', statEpsLab:'Episodes total',
+            libTitle:'Library', filterAll:'All',
+            seasonWord:'Season', seasonsWord:'Seasons',
+            backHome:'Back to Overview', backEp:'Episode Selection',
+            seasonsLabel:'Seasons &amp; Episodes',
+            prev:'Previous', next:'Next',
+            livePill:'<i class="fas fa-bolt"></i> NEW EPISODES DAILY',
+            keyHint:'<kbd>←</kbd> / <kbd>→</kbd> arrow keys to switch · <kbd>ESC</kbd> back to episode list',
+            footerText:'All streams are provided by external hosting services.',
+            banner:'🎮 <strong>G2A.com</strong> — Cheap Gaming Keys &amp; Software. Save up to 80%! Discover now →',
+            sidebarAd:'🛡️ NordVPN — Stream safely &amp; anonymously. Save -68% now!',
+            sidebarBtn:'Go to offer →',
+            playerAd:'NordVPN — Stream securely, browse anonymously. Save -68% now!',
+            playerAdBtn:'Go to offer →',
+            nativeAd:'Amazon Prime — Stream endless series &amp; movies!',
+            popupTitle:'Amazon Prime Video',
+            popupText:'Stream thousands of series and movies — including exclusive Originals. 30 days completely free!',
+            popupBtn:'Try 30 days free',
+            popupSkip:'Skip',
+            folge:'EPISODE', searchPlaceholder:'Search for anime...',
+        }
+    };
+
+    let lang = 'de';
+    let activeGenre = 'Alle';
+    let currentAnime = null, currentSeasonIdx = 0, currentEpIdx = 0;
+    let popupInterval = null;
+
+    function setLang(l) {
+        lang = l;
+        document.getElementById('btnDE').classList.toggle('active', l==='de');
+        document.getElementById('btnEN').classList.toggle('active', l==='en');
+        activeGenre = T[l].filterAll;
+        applyT(); renderFilters(); renderLibrary();
+        if (currentAnime && document.getElementById('detail-view').style.display !== 'none') renderDetail();
+    }
+
+    function applyT() {
+        const t = T[lang];
+        document.getElementById('heroTitle').innerHTML = t.heroTitle;
+        document.getElementById('heroSub').textContent = t.heroSub;
+        document.getElementById('statSeriesLab').textContent = t.statSeriesLab;
+        document.getElementById('statEpsLab').textContent = t.statEpsLab;
+        document.getElementById('libTitle').textContent = t.libTitle;
+        document.getElementById('backHomeLabel').textContent = t.backHome;
+        document.getElementById('backEpLabel').textContent = t.backEp;
+        document.getElementById('seasonsLabel').innerHTML = t.seasonsLabel;
+        document.getElementById('prevLabel').textContent = t.prev;
+        document.getElementById('nextLabel').textContent = t.next;
+        document.getElementById('livePillText').innerHTML = t.livePill;
+        document.getElementById('keyHint').innerHTML = t.keyHint;
+        document.getElementById('footerText').textContent = t.footerText;
+        document.getElementById('bannerText').innerHTML = t.banner;
+        document.getElementById('sidebarAdText').innerHTML = t.sidebarAd;
+        document.getElementById('sidebarAdBtn').textContent = t.sidebarBtn;
+        document.getElementById('playerAdText').textContent = t.playerAd;
+        document.getElementById('playerAdBtn').textContent = t.playerAdBtn;
+        document.getElementById('popupTitle').textContent = t.popupTitle;
+        document.getElementById('popupText').textContent = t.popupText;
+        document.getElementById('popupBtn').textContent = t.popupBtn;
+        document.getElementById('popupSkipLabel').textContent = t.popupSkip;
+        document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+    }
 
     function init() {
-        renderFilters();
-        renderLibrary();
-        updateStats();
+        applyT(); renderFilters(); renderLibrary(); updateStats();
+        setTimeout(() => showPopupAd(), 10000);
     }
 
     function updateStats() {
         document.getElementById('statSeries').textContent = DATA.length;
-        let totalEps = 0;
-        DATA.forEach(a => a.seasons.forEach(s => totalEps += s.episodes.length));
-        document.getElementById('statEps').textContent = totalEps;
+        let t = 0; DATA.forEach(a => a.seasons.forEach(s => t += s.episodes.length));
+        document.getElementById('statEps').textContent = t;
     }
 
     function renderFilters() {
-        const genres = ["Alle", ...new Set(DATA.flatMap(a => a.genres))];
-        const container = document.getElementById('genreFilters');
-        container.innerHTML = genres.map(g => `
-            <div class="filter-chip ${g === activeGenre ? 'active' : ''}" onclick="setFilter('${g}')">${g}</div>
-        `).join('');
+        const all = T[lang].filterAll;
+        const genres = [all, ...new Set(DATA.flatMap(a => a.genres))];
+        document.getElementById('genreFilters').innerHTML = genres.map(g =>
+            `<div class="filter-chip ${g===activeGenre?'active':''}" onclick="setFilter('${g}')">${g}</div>`
+        ).join('');
     }
 
-    function setFilter(g) {
-        activeGenre = g;
-        renderFilters();
-        renderLibrary();
-    }
+    function setFilter(g) { activeGenre=g; renderFilters(); renderLibrary(); }
 
     function renderLibrary() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        const grid = document.getElementById('animeGrid');
-        
-        const filtered = DATA.filter(a => {
-            const matchesGenre = activeGenre === "Alle" || a.genres.includes(activeGenre);
-            const matchesSearch = a.name.toLowerCase().includes(query);
-            return matchesGenre && matchesSearch;
-        });
-
-        grid.innerHTML = filtered.map(a => `
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const all = T[lang].filterAll;
+        const t = T[lang];
+        const filtered = DATA.filter(a =>
+            (activeGenre===all || a.genres.includes(activeGenre)) && a.name.toLowerCase().includes(q)
+        );
+        let html = filtered.map(a => `
             <div class="anime-card" onclick="openDetail('${a.id}')">
                 <div class="card-img">
                     <img src="${a.thumbnail}" alt="${a.name}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
@@ -431,106 +674,125 @@
                 </div>
                 <div class="card-info">
                     <div class="card-name">${a.name}</div>
-                    <div class="card-meta">${a.genres[0]} • ${a.seasons.length} ${a.seasons.length === 1 ? 'Staffel' : 'Staffeln'}</div>
+                    <div class="card-meta">${a.genres[0]} • ${a.seasons.length} ${a.seasons.length===1?t.seasonWord:t.seasonsWord}</div>
                 </div>
             </div>
         `).join('');
+        html += `
+            <div class="ad-native" onclick="void(0)">
+                <div class="ad-native-img">📦</div>
+                <div class="ad-native-body">
+                    <div class="ad-native-label">Werbung</div>
+                    <div class="ad-native-text">${t.nativeAd}</div>
+                </div>
+            </div>
+        `;
+        document.getElementById('animeGrid').innerHTML = html;
     }
 
     function openDetail(id) {
-        currentAnime = DATA.find(a => a.id === id);
+        currentAnime = DATA.find(a => a.id===id);
         currentSeasonIdx = 0;
-        
-        document.getElementById('detailTitle').textContent = currentAnime.name;
-        document.getElementById('detailDesc').textContent = currentAnime.description;
-        document.getElementById('detailCover').innerHTML = `<img src="${currentAnime.thumbnail}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">`;
-        document.getElementById('detailGenres').innerHTML = currentAnime.genres.map(g => `
-            <span class="filter-chip" style="cursor:default; padding: 4px 12px; font-size:11px">${g}</span>
-        `).join('');
-
-        renderSeasonTabs();
-        renderEpisodes();
+        renderDetail();
         showView('detail-view');
     }
 
-    function renderSeasonTabs() {
-        const container = document.getElementById('seasonTabs');
-        container.innerHTML = currentAnime.seasons.map((s, i) => `
-            <div class="season-tab ${i === currentSeasonIdx ? 'active' : ''}" onclick="setSeason(${i})">
-                ${s.name}
-            </div>
-        `).join('');
+    function renderDetail() {
+        const a = currentAnime;
+        document.getElementById('detailTitle').textContent = a.name;
+        document.getElementById('detailDesc').textContent = lang==='de' ? a.desc_de : a.desc_en;
+        document.getElementById('detailCover').innerHTML = `<img src="${a.thumbnail}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">`;
+        document.getElementById('detailGenres').innerHTML = a.genres.map(g =>
+            `<span class="filter-chip" style="cursor:default;padding:4px 12px;font-size:11px">${g}</span>`
+        ).join('');
+        renderSeasonTabs(); renderEpisodes();
     }
 
-    function setSeason(idx) {
-        currentSeasonIdx = idx;
-        renderSeasonTabs();
-        renderEpisodes();
+    function renderSeasonTabs() {
+        document.getElementById('seasonTabs').innerHTML = currentAnime.seasons.map((s,i) =>
+            `<div class="season-tab ${i===currentSeasonIdx?'active':''}" onclick="setSeason(${i})">${lang==='de'?s.name_de:s.name_en}</div>`
+        ).join('');
     }
+
+    function setSeason(idx) { currentSeasonIdx=idx; renderSeasonTabs(); renderEpisodes(); }
 
     function renderEpisodes() {
-        const container = document.getElementById('episodeList');
-        const episodes = currentAnime.seasons[currentSeasonIdx].episodes;
-
-        container.innerHTML = episodes.map((ep, i) => `
+        const eps = currentAnime.seasons[currentSeasonIdx].episodes;
+        document.getElementById('episodeList').innerHTML = eps.map((ep,i) => `
             <div class="episode-card" onclick="playEpisode(${i})">
-                <div class="ep-idx">${(i + 1).toString().padStart(2, '0')}</div>
-                <div class="ep-title">${ep.title}</div>
-                <i class="fas fa-play-circle" style="color:var(--primary); font-size:20px"></i>
+                <div class="ep-idx">${String(i+1).padStart(2,'0')}</div>
+                <div class="ep-title">${lang==='de'?ep.de:ep.en}</div>
+                <i class="fas fa-play-circle" style="color:var(--primary);font-size:20px"></i>
             </div>
         `).join('');
     }
 
     function playEpisode(idx) {
         currentEpIdx = idx;
-        const episode = currentAnime.seasons[currentSeasonIdx].episodes[idx];
-        
-        document.getElementById('playerTitle').textContent = episode.title;
-        document.getElementById('playerMeta').textContent = `${currentAnime.name.toUpperCase()} • ${currentAnime.seasons[currentSeasonIdx].name.toUpperCase()} • FOLGE ${idx + 1}`;
-        
-        const videoBox = document.getElementById('videoBox');
-        // Hier sicherstellen, dass 'file' aus dem DATA Objekt genommen wird
-        videoBox.innerHTML = `<iframe src="${episode.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
+        const ep = currentAnime.seasons[currentSeasonIdx].episodes[idx];
+        const sName = lang==='de' ? currentAnime.seasons[currentSeasonIdx].name_de : currentAnime.seasons[currentSeasonIdx].name_en;
 
-        const hasPrev = idx > 0;
-        const hasNext = idx < currentAnime.seasons[currentSeasonIdx].episodes.length - 1;
+        document.getElementById('playerTitle').textContent = lang==='de' ? ep.de : ep.en;
+        document.getElementById('playerMeta').textContent =
+            `${currentAnime.name.toUpperCase()} • ${sName.toUpperCase()} • ${T[lang].folge} ${idx+1}`;
+        document.getElementById('videoBox').innerHTML =
+            `<iframe src="${ep.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
 
+        const total = currentAnime.seasons[currentSeasonIdx].episodes.length;
         const prevBtn = document.getElementById('prevEp');
         const nextBtn = document.getElementById('nextEp');
-
-        prevBtn.disabled = !hasPrev;
-        prevBtn.onclick = () => playEpisode(idx - 1);
-        
-        nextBtn.disabled = !hasNext;
-        nextBtn.onclick = () => playEpisode(idx + 1);
+        prevBtn.disabled = idx===0;
+        prevBtn.onclick = () => playEpisode(idx-1);
+        nextBtn.disabled = idx===total-1;
+        nextBtn.onclick = () => playEpisode(idx+1);
 
         showView('player-view');
+        if ((idx+1) % 3 === 0) showPopupAd();
+    }
+
+    function showPopupAd() {
+        document.getElementById('adPopup').style.display = 'flex';
+        let secs = 5;
+        document.getElementById('skipTimer').textContent = `(${secs})`;
+        clearInterval(popupInterval);
+        popupInterval = setInterval(() => {
+            secs--;
+            const el = document.getElementById('skipTimer');
+            if (el) el.textContent = `(${secs})`;
+            if (secs <= 0) { clearInterval(popupInterval); closePopup(); }
+        }, 1000);
+    }
+
+    function closePopup() {
+        clearInterval(popupInterval);
+        document.getElementById('adPopup').style.display = 'none';
     }
 
     function showView(id) {
-        ['home-view', 'detail-view', 'player-view'].forEach(v => {
-            document.getElementById(v).style.display = (v === id) ? 'block' : 'none';
-        });
+        ['home-view','detail-view','player-view'].forEach(v =>
+            document.getElementById(v).style.display = v===id ? 'block' : 'none'
+        );
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showHome() {
-        stopVideo();
-        showView('home-view');
-    }
+    function showHome() { stopVideo(); showView('home-view'); }
+    function showDetail() { stopVideo(); renderEpisodes(); showView('detail-view'); }
+    function stopVideo() { document.getElementById('videoBox').innerHTML = ''; }
 
-    function showDetail() {
-        stopVideo();
-        showView('detail-view');
-    }
+    document.addEventListener('keydown', e => {
+        if (document.getElementById('adPopup').style.display !== 'none') {
+            if (e.key === 'Escape') closePopup();
+            return;
+        }
+        const playerOpen = document.getElementById('player-view').style.display !== 'none';
+        if (!playerOpen) return;
+        const total = currentAnime.seasons[currentSeasonIdx].episodes.length;
+        if (e.key === 'ArrowRight') { e.preventDefault(); if (currentEpIdx < total-1) playEpisode(currentEpIdx+1); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); if (currentEpIdx > 0) playEpisode(currentEpIdx-1); }
+        if (e.key === 'Escape') showDetail();
+    });
 
-    function stopVideo() {
-        document.getElementById('videoBox').innerHTML = '';
-    }
-
-    // Start App
     window.onload = init;
 </script>
-
 </body>
 </html>
