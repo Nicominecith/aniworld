@@ -27,12 +27,13 @@
             min-height: 100vh;
         }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--darker); }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
-        /* ── NAV ─────────────────────────────── */
+        /* NAV */
         nav {
             background: rgba(2,6,23,0.97);
             border-bottom: 1px solid var(--border);
@@ -78,10 +79,10 @@
             50%      { box-shadow: 0 0 0 8px rgba(59,130,246,0); }
         }
 
-        /* ── MAIN ────────────────────────────── */
+        /* MAIN */
         main { max-width: 1280px; margin: 0 auto; padding: 32px 20px 80px; }
 
-        /* ── HERO ────────────────────────────── */
+        /* HERO */
         .hero {
             border-radius: 20px; padding: 44px 40px;
             margin-bottom: 32px; position: relative; overflow: hidden;
@@ -118,7 +119,7 @@
             text-transform: uppercase; letter-spacing: .5px;
         }
 
-        /* ── TICKER ──────────────────────────── */
+        /* TICKER */
         .ticker {
             background: #0f172a; border: 1px solid #1e3a5f;
             border-radius: 12px; padding: 13px 20px;
@@ -151,7 +152,7 @@
         }
         .ticker-item i { color: var(--blue); font-size: 8px; }
 
-        /* ── GRID ─────────────────────────────── */
+        /* GRID */
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
         .section-title {
             font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px;
@@ -189,7 +190,7 @@
         .card-title { font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .card-sub { font-size: 11px; color: var(--muted); }
 
-        /* ── DETAIL ───────────────────────────── */
+        /* DETAIL */
         #detail-section, #player-section { display: none; }
         .back-btn {
             background: #1e293b; border: none; color: #94a3b8; border-radius: 8px; padding: 9px 18px;
@@ -199,7 +200,7 @@
         .back-btn:hover { background: #334155; color: #fff; }
 
         .detail-hero { display: flex; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
-        .detail-poster { width: 190px; flex-shrink: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 2/3; }
+        .detail-poster { width: 190px; flex-shrink: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 2/3; background: var(--dark); }
         .detail-poster img { width: 100%; height: 100%; object-fit: cover; }
         .detail-info { flex: 1; min-width: 260px; }
         .detail-title { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 1px; line-height: 1; margin-bottom: 10px; }
@@ -218,13 +219,12 @@
             font-size: 17px; color: var(--blue);
         }
 
-        /* ── PLAYER ───────────────────────────── */
+        /* PLAYER */
         .video-container {
             background: #000; border-radius: 14px; overflow: hidden;
             border: 1px solid var(--border); aspect-ratio: 16/9; width: 100%;
             position: relative;
         }
-        /* Iframe Styles for Embeds */
         .video-container iframe, .video-container video {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
@@ -266,7 +266,7 @@
             <div class="hero-content">
                 <div class="hero-eyebrow">Willkommen bei AniWorld</div>
                 <div class="hero-title">Deine <span>Anime Mediathek</span></div>
-                <div class="hero-desc">Entdecke hunderte Episoden deiner Lieblingsserien. Jetzt auch mit Support für externe Video-Hoster wie Vidmoly.</div>
+                <div class="hero-desc">Entdecke hunderte Episoden deiner Lieblingsserien. Alle Cover können jetzt direkt via Bild-Link eingebunden werden.</div>
                 <div class="hero-stats">
                     <div class="hero-stat"><div class="num" id="stat-series">0</div><div class="lbl">Serien</div></div>
                     <div class="hero-stat"><div class="num" id="stat-eps">0</div><div class="lbl">Episoden</div></div>
@@ -331,8 +331,7 @@
 <script>
 /**
  * DATENBANK
- * Hier kannst du einfach neue Serien und Folgen hinzufügen.
- * file: Kann ein lokaler Pfad (z.B. "ordner/video.mp4") ODER ein Web-Link (Embed-URL) sein.
+ * thumbnail: Kann eine Web-URL (http://...) oder ein lokaler Pfad (img/cover.jpg) sein.
  */
 const LIBRARY = [
     {
@@ -423,7 +422,7 @@ function renderLibrary() {
     document.getElementById('anime-grid').innerHTML = list.map(a => `
         <div class="ani-card" onclick="openAnime('${a.id}')">
             <div class="card-thumb">
-                <img src="${a.thumbnail}" alt="${a.name}">
+                <img src="${a.thumbnail}" alt="${a.name}" onerror="this.src='https://via.placeholder.com/300x450?text=Bild+nicht+gefunden'">
                 <div class="card-overlay"></div>
                 <div class="card-badges">
                     <span class="cbadge ${a.isNew?'green':'blue'}">${a.isNew?'NEU':'TV'}</span>
@@ -439,9 +438,13 @@ function renderLibrary() {
 function openAnime(id) {
     currentAnime = LIBRARY.find(a => a.id === id);
     showSection('detail-section');
-    document.getElementById('detail-poster').innerHTML = `<img src="${currentAnime.thumbnail}">`;
+    document.getElementById('detail-poster').innerHTML = `<img src="${currentAnime.thumbnail}" onerror="this.src='https://via.placeholder.com/300x450?text=Bild+nicht+gefunden'">`;
     document.getElementById('detail-title').textContent = currentAnime.name;
     document.getElementById('detail-desc').textContent = currentAnime.description;
+    
+    // Genres im Detail-View anzeigen
+    document.getElementById('detail-tags').innerHTML = currentAnime.genres.map(g => `<span class="chip" style="cursor:default">${g}</span>`).join('');
+
     document.getElementById('ep-list').innerHTML = currentAnime.episodes.map((ep, i) => `
         <div class="ep-item" onclick="startEpisode(${i})">
             <div class="ep-num">${i+1}</div>
@@ -464,18 +467,14 @@ function startEpisode(idx) {
     
     const container = document.getElementById('video-container');
     
-    // Logik für Embed vs Lokale Datei
     if (ep.file.includes('http')) {
-        // Iframe für Vidmoly etc.
         container.innerHTML = `<iframe src="${ep.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
-        document.getElementById('host-info').textContent = "Stream via Vidmoly/Web";
+        document.getElementById('host-info').textContent = "Stream via Web-Host";
     } else {
-        // Lokaler Video Player
         container.innerHTML = `<video id="main-video" controls autoplay src="${ep.file}"></video>`;
-        document.getElementById('host-info').textContent = "Lokaler Server";
+        document.getElementById('host-info').textContent = "Lokale Mediathek";
     }
 
-    // Navigation Buttons
     document.getElementById('prev-btn').disabled = idx === 0;
     document.getElementById('prev-btn').onclick = () => startEpisode(idx - 1);
     
@@ -502,7 +501,7 @@ function goDetail() {
 
 function stopVideo() {
     const container = document.getElementById('video-container');
-    container.innerHTML = ''; // Stoppt Iframe und Video sofort
+    container.innerHTML = ''; 
 }
 
 init();
