@@ -317,6 +317,19 @@
         }
         .popup-close:hover { color: var(--text-main); }
 
+        /* Blocked Overlay (AdBlock) Styling */
+        .blocker-overlay {
+            position: fixed; inset: 0; background: rgba(2, 6, 23, 0.98); z-index: 10000;
+            display: none; align-items: center; justify-content: center; text-align: center; padding: 24px;
+        }
+        .blocker-box {
+            background: var(--bg-card); border: 2px solid var(--primary); border-radius: 24px;
+            padding: 40px; max-width: 500px; width: 100%; box-shadow: 0 0 50px var(--primary-glow);
+        }
+        .blocker-box i { font-size: 64px; color: #ef4444; margin-bottom: 20px; }
+        .blocker-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 12px; }
+        .blocker-box p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+
         footer { text-align: center; padding: 60px 24px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
 
         @media (max-width: 900px) {
@@ -330,6 +343,16 @@
     </style>
 </head>
 <body>
+
+<!-- ANTI ADBLOCK OVERLAY -->
+<div class="blocker-overlay" id="adBlockerOverlay">
+    <div class="blocker-box">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h2 id="adBlockerTitle">Werbeblocker erkannt!</h2>
+        <p id="adBlockerText">Um die Anime-Streams ohne Probleme abspielen zu können, musst du deinen AdBlocker auf dieser Seite deaktivieren. Bitte schalte ihn aus und lade die Seite neu.</p>
+        <button class="btn-action" style="margin: 0 auto; background: var(--primary);" onclick="window.location.reload()"><i class="fas fa-sync-alt"></i> Neu laden</button>
+    </div>
+</div>
 
 <!-- TOP AD BANNER -->
 <div id="topAdBanner">
@@ -557,7 +580,22 @@
                     {de:"Eine kleine Klinge",en:"The Small Blade",file:"https://vidmoly.biz/embed-6pywzm2da5be.html"},
                     {de:"Ich höre einen Herzschlag",en:"I Can Hear His Heartbeat",file:"https://vidmoly.biz/embed-nhrlet8jo13l.html"},
                     {de:"Der Verbleib des linken Arms",en:"Where Is the Left Arm's Origin",file:"https://vidmoly.biz/embed-xs4y8hfofot6.html"},
-                    {de:"Die Reaktion",en:"Response",file:"https://vidmoly.biz/embed-8old7cyvmuff.html"}
+                    {de:"Die Reaktion",en:"Response",file:"https://vidmoly.biz/embed-8old7cyvmuff.html"},
+                    {de:"Das Idol",en:"The Idol",file:"https://vidmoly.biz/embed-e21zugwoygzk.html"},
+                    {de:"Die Wunde",en:"The Wound",file:"https://vidmoly.biz/embed-jopycompusim.html"},
+                    {de:"Urtrieb",en:"Primal instinct",file:"https://vidmoly.biz/embed-q9fui8v3qaor.html"},
+                    {de:"Noch nicht fähig, in die Augen zu sehen",en:"Not yet able to look into the eyes",file:"https://vidmoly.biz/embed-49k6fkv2epqv.html"},
+                    {de:"Spezialkommando",en:"Special Operations Unit",file:"https://vidmoly.biz/embed-l1cpfteed6zt.html"},
+                    {de:"Was getan werden muss",en:"What needs to be done",file:"https://vidmoly.biz/embed-irp13l1bnmji.html"},
+                    {de:"Der weibliche Titan",en:"The Female Titan",file:"https://vidmoly.biz/embed-ze6v9ywdw1dv.html"},
+                    {de:"Der Wald der Baumriesen",en:"The Forest of Giant Trees",file:"https://vidmoly.biz/embed-jylnov4txl96.html"},
+                    {de:"Der Biss",en:"The Bite",file:"https://vidmoly.biz/embed-jagtepn5or8o.html"},
+                    {de:"Erwin Smith",en:"Erwin Smith",file:"https://vidmoly.biz/embed-y9ntwqjznx5h.html"},
+                    {de:"Ein harter Schlag",en:"A heavy blow",file:"https://vidmoly.biz/embed-0kj6a6swghds.html"},
+                    {de:"Die Besiegten",en:"The Defeated",file:"https://vidmoly.biz/embed-fayytipdkipr.html"},
+                    {de:"Das Lächeln",en:"The Smile",file:"https://vidmoly.biz/embed-dpgowjiq4t36.html"},
+                    {de:"Mitleid",en:"Mercy",file:"https://vidmoly.biz/embed-120xqo3brk9j.html"},
+                    {de:"Die Mauer",en:"The Wall",file:"https://vidmoly.biz/embed-w07fo6fz7gkl.html"},
                 ]
             }]
         }
@@ -587,6 +625,8 @@
             popupBtn:'30 Tage gratis testen',
             popupSkip:'Überspringen',
             folge:'FOLGE', searchPlaceholder:'Suche nach Anime...',
+            blockerTitle: 'Werbeblocker erkannt!',
+            blockerText: 'Um die Anime-Streams ohne Probleme abspielen zu können, musst du deinen AdBlocker auf dieser Seite deaktivieren. Bitte schalte ihn aus und lade die Seite neu.',
         },
         en: {
             heroTitle:'Your <span>Anime World</span>',
@@ -611,6 +651,8 @@
             popupBtn:'Try 30 days free',
             popupSkip:'Skip',
             folge:'EPISODE', searchPlaceholder:'Search for anime...',
+            blockerTitle: 'AdBlocker detected!',
+            blockerText: 'To enjoy the anime streams without issues, please disable your AdBlocker on this page. Turn it off and reload the page.',
         }
     };
 
@@ -618,6 +660,24 @@
     let activeGenre = 'Alle';
     let currentAnime = null, currentSeasonIdx = 0, currentEpIdx = 0;
     let popupInterval = null;
+
+    // Erkennung eines aktiven Werbeblockers
+    function detectAdBlocker() {
+        // Versuch, eine typische Werbe-URL zu laden, die von fast jedem Werbeblocker blockiert wird
+        const testAd = document.createElement('div');
+        testAd.innerHTML = '&nbsp;';
+        testAd.className = 'adsbox';
+        document.body.appendChild(testAd);
+        
+        window.setTimeout(function() {
+            if (testAd.offsetHeight === 0) {
+                // AdBlocker blockiert das Element
+                document.getElementById('adBlockerOverlay').style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Scrollen verhindern
+            }
+            testAd.remove();
+        }, 100);
+    }
 
     function setLang(l) {
         lang = l;
@@ -653,10 +713,15 @@
         document.getElementById('popupBtn').textContent = t.popupBtn;
         document.getElementById('popupSkipLabel').textContent = t.popupSkip;
         document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+        
+        // Texte für AdBlocker-Box übersetzen
+        document.getElementById('adBlockerTitle').textContent = t.blockerTitle;
+        document.getElementById('adBlockerText').textContent = t.blockerText;
     }
 
     function init() {
         applyT(); renderFilters(); renderLibrary(); updateStats();
+        detectAdBlocker(); // Führe AdBlock-Erkennung aus
         setTimeout(() => showPopupAd(), 10000);
     }
 
@@ -752,8 +817,10 @@
         document.getElementById('playerTitle').textContent = lang==='de' ? ep.de : ep.en;
         document.getElementById('playerMeta').textContent =
             `${currentAnime.name.toUpperCase()} • ${sName.toUpperCase()} • ${T[lang].folge} ${idx+1}`;
+        
+        // Iframe-Schutz (Werbungsblocker): blockiert Popups und Redirects der Host-Anbieter via 'sandbox' Attribut
         document.getElementById('videoBox').innerHTML =
-            `<iframe src="${ep.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
+            `<iframe src="${ep.file}" allowfullscreen scrolling="no" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>`;
 
         const total = currentAnime.seasons[currentSeasonIdx].episodes.length;
         const prevBtn = document.getElementById('prevEp');
